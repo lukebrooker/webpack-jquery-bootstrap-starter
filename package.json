@@ -4,7 +4,7 @@
   "description": "A very basic starter, probably don't use in production.",
   "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "standard",
     "build": "webpack -p",
     "start": "webpack-dev-server -d --progress --colors --inline --hot --port 8000"
   },
@@ -21,6 +21,7 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "node-sass": "^3.3.2",
     "sass-loader": "^2.0.1",
+    "standard": "^5.1.1",
     "style-loader": "^0.12.3",
     "webpack": "^1.12.0",
     "webpack-dev-server": "^1.10.1"
