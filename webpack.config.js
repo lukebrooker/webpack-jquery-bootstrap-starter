@@ -1,12 +1,11 @@
 var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   devtool: '#inline-source-map',
-  entry: [
-    'webpack-dev-server/client?http://localhost:8000/',
-    'webpack/hot/only-dev-server',
-    './src/index.js'
-  ],
+  entry: {
+    bundle: './src/index'
+  },
 
   output: {
     path: __dirname,
@@ -14,7 +13,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js', '.css']
+    extensions: ['', '.js', '.css', 'scss']
   },
 
   module: {
@@ -26,18 +25,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css']
+        loader: ExtractTextPlugin.extract(
+                  // activate source maps via loader query
+                  'css?sourceMap!' +
+                  'sass?sourceMap'
+                )
       }
     ]
   },
 
   plugins: [
-    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('bundle.css'),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
